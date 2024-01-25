@@ -10,18 +10,23 @@ class Video
     private int $visibility = self::PRIVATE;
     private int $ageLimit;
 
-    public function getVisibility(): int
+    public function isPublic(): bool
     {
-        return $this->visibility;
+        return $this->visibility === self::PUBLIC;
+    }
+
+    public function publish(): int
+    {
+        $this->visibility = self::PUBLIC;
     }
 
     public function checkIfVisibilityIsValidAndUpdateIt(int $visibility): void
     {
-        if (in_array($visibility, [self::PUBLIC, self::PRIVATE])) {
-            $this->visibility = $visibility;
-        } else {
+        if (!in_array($visibility, [self::PUBLIC, self::PRIVATE])) {
             throw new \InvalidArgumentException('Invalid visibility');
         }
+
+        $this->visibility = $visibility;
     }
 
     public function getAgeLimit(): int
