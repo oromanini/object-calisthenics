@@ -2,6 +2,9 @@
 
 namespace Alura\Calisthenics\Tests\Unit\Domain\Student;
 
+use Alura\Calisthenics\Domain\Email\Email;
+use Alura\Calisthenics\Domain\Student\Address;
+use Alura\Calisthenics\Domain\Student\FullName;
 use Alura\Calisthenics\Domain\Student\Student;
 use Alura\Calisthenics\Domain\Video\Video;
 use PHPUnit\Framework\TestCase;
@@ -13,16 +16,17 @@ class StudentTest extends TestCase
     protected function setUp(): void
     {
         $this->student = new Student(
-            'email@example.com',
-            new \DateTimeImmutable('1997-10-15'),
-            'Vinicius',
-            'Dias',
-            'Rua de Exemplo',
-            '71B',
-            'Meu Bairro',
-            'Minha Cidade',
-            'Meu estado',
-            'Brasil'
+            fullName: new FullName('Romanini', 'Oscar'),
+            email: new Email('email@example.com'),
+            birthdate: new \DateTimeImmutable('1997-10-15'),
+            address: new Address(
+                street: 'Rua X',
+                number: '200',
+                province: 'Zona 8',
+                city: 'Cianorte',
+                state: 'Parana',
+                country: 'Brazil'
+            )
         );
     }
 
